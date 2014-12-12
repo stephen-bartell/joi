@@ -383,6 +383,22 @@ describe('object', function () {
                 });
             });
         });
+
+        it('clones should have same default options as originals', function (done) {
+            
+            var a = Joi.object().keys({ a: 1 })
+            var b = a.keys()
+
+            a.validate({ c: 1 }, function (err, value) {
+
+                expect(err).to.exist();
+                b.validate({ c: 1 }, function (err, value) {
+
+                    expect(err).to.exist();
+                    done()
+                })
+            })
+        });
     });
 
     describe('#unknown', function () {
